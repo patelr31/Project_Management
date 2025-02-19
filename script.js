@@ -1,4 +1,4 @@
-const chapters = {
+const chapters = JSON.parse(localStorage.getItem("projectTasks")) || {
     "Chapter 1: Introduction to Project Management": [
         { name: "Project Charter", status: "Remaining" },
         { name: "Stakeholder Register", status: "Remaining" },
@@ -37,36 +37,6 @@ const chapters = {
         { name: "Responsibility Assignment Matrix (RAM)", status: "Remaining" },
         { name: "Resource Utilization Reports", status: "Remaining" }
     ],
-    "Chapter 7: Project Communication Management": [
-        { name: "Communication Plan", status: "Remaining" },
-        { name: "Meeting Agendas and Minutes", status: "Remaining" },
-        { name: "Project Status Reports", status: "Remaining" },
-        { name: "Stakeholder Communication Logs", status: "Remaining" }
-    ],
-    "Chapter 8: Project Risk Management": [
-        { name: "Risk Management Plan", status: "Remaining" },
-        { name: "Risk Register", status: "Remaining" },
-        { name: "Risk Response Plans", status: "Remaining" },
-        { name: "Updated Risk Assessment Reports", status: "Remaining" }
-    ],
-    "Chapter 9: Project Procurement Management": [
-        { name: "Procurement Plan", status: "Remaining" },
-        { name: "Vendor Contracts", status: "Remaining" },
-        { name: "Purchase Orders", status: "Remaining" },
-        { name: "Procurement Performance Reviews", status: "Remaining" }
-    ],
-    "Chapter 10: Project Integration Management": [
-        { name: "Project Management Plan", status: "Remaining" },
-        { name: "Change Log", status: "Remaining" },
-        { name: "Issue Log", status: "Remaining" },
-        { name: "Lessons Learned Document", status: "Remaining" }
-    ],
-    "Chapter 11: Project Monitoring and Control": [
-        { name: "Performance Reports (Earned Value Analysis)", status: "Remaining" },
-        { name: "Variance Reports", status: "Remaining" },
-        { name: "Control Charts", status: "Remaining" },
-        { name: "Updated KPI Reports", status: "Remaining" }
-    ],
     "Chapter 12: Project Closure": [
         { name: "Final Project Report", status: "Remaining" },
         { name: "Handover Document", status: "Remaining" },
@@ -98,7 +68,7 @@ function renderTasks() {
 
     for (const chapter in chapters) {
         const chapterRow = document.createElement("tr");
-        chapterRow.innerHTML = `<td colspan="4" class="chapter-header"><strong>${chapter}</strong></td>`;
+        chapterRow.innerHTML = `<td colspan="3" class="chapter-header"><strong>${chapter}</strong></td>`;
         taskList.appendChild(chapterRow);
 
         chapters[chapter].forEach((task, index) => {
@@ -121,9 +91,21 @@ function renderTasks() {
     updateTaskCounts();
 }
 
+// Save tasks to localStorage
+function saveTasks() {
+    localStorage.setItem("projectTasks", JSON.stringify(chapters));
+}
+
 function updateStatus(chapter, index, newStatus) {
     chapters[chapter][index].status = newStatus;
+    saveTasks(); // Save changes
     renderTasks();
+}
+
+// Clear localStorage and reset progress
+function resetProgress() {
+    localStorage.removeItem("projectTasks");
+    location.reload(); // Reload page to reset all data
 }
 
 document.addEventListener("DOMContentLoaded", renderTasks);
