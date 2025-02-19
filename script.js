@@ -2,20 +2,20 @@ const chapters = {
     "Chapter 1: Introduction to Project Management": [
         { name: "Project Charter", status: "Completed" },
         { name: "Stakeholder Register", status: "In Progress" },
-        { name: "Business Case", status: "Remaining" },
-        { name: "Feasibility Study", status: "Completed" }
+        { name: "Business Case", status: "Completed" },
+        { name: "Assumption Log", status: "Completed" }
     ],
     "Chapter 2: Project Scope Management": [
         { name: "Scope Management Plan", status: "Completed" },
-        { name: "Work Breakdown Structure (WBS)", status: "In Progress" },
-        { name: "Scope Statement", status: "Remaining" },
+        { name: "Work Breakdown Structure (WBS)", status: "Completed" },
+        { name: "Scope Statement", status: "Completed" },
         { name: "Requirements Documentation", status: "Completed" },
         { name: "Change Request Forms (Scope-related)", status: "Remaining" }
     ],
     "Chapter 3: Project Time Management": [
         { name: "Schedule Management Plan", status: "Completed" },
-        { name: "Project Schedule (Gantt Chart, Critical Path Analysis)", status: "Remaining" },
-        { name: "Activity List and Attributes", status: "In Progress" },
+        { name: "Project Schedule (Gantt Chart, Critical Path Analysis)", status: "Completed" },
+        { name: "Activity List and Attributes", status: "Remaining" },
         { name: "Milestone List", status: "Completed" }
     ],
     "Chapter 4: Project Cost Management": [
