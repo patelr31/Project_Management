@@ -25,10 +25,10 @@ const chapters = {
         { name: "Expense Tracking Reports", status: "Remaining" }
     ],
     "Chapter 5: Project Quality Management": [
-        { name: "Quality Management Plan", status: "Remaining" },
-        { name: "Quality Metrics", status: "Remaining" },
+        { name: "Quality Management Plan", status: "Completed" },
+        { name: "Quality Metrics", status: "Completed" },
         { name: "Quality Assurance Reports", status: "Remaining" },
-        { name: "Quality Control Checklists", status: "Remaining" }
+        { name: "Quality Control Checklists", status: "Completed" }
     ],
     "Chapter 6: Project Resource Management": [
         { name: "Resource Management Plan", status: "Remaining" },
