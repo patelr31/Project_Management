@@ -1,66 +1,24 @@
-const chapters = JSON.parse(localStorage.getItem("projectTasks")) || {
+const chapters = {
     "Chapter 1: Introduction to Project Management": [
-        { name: "Project Charter", status: "Remaining" },
-        { name: "Stakeholder Register", status: "Remaining" },
+        { name: "Project Charter", status: "Completed" },
+        { name: "Stakeholder Register", status: "In Progress" },
         { name: "Business Case", status: "Remaining" },
-        { name: "Feasibility Study", status: "Remaining" }
+        { name: "Feasibility Study", status: "Completed" }
     ],
     "Chapter 2: Project Scope Management": [
-        { name: "Scope Management Plan", status: "Remaining" },
-        { name: "Work Breakdown Structure (WBS)", status: "Remaining" },
+        { name: "Scope Management Plan", status: "Completed" },
+        { name: "Work Breakdown Structure (WBS)", status: "In Progress" },
         { name: "Scope Statement", status: "Remaining" },
-        { name: "Requirements Documentation", status: "Remaining" },
+        { name: "Requirements Documentation", status: "Completed" },
         { name: "Change Request Forms (Scope-related)", status: "Remaining" }
     ],
     "Chapter 3: Project Time Management": [
-        { name: "Schedule Management Plan", status: "Remaining" },
+        { name: "Schedule Management Plan", status: "Completed" },
         { name: "Project Schedule (Gantt Chart, Critical Path Analysis)", status: "Remaining" },
-        { name: "Activity List and Attributes", status: "Remaining" },
-        { name: "Milestone List", status: "Remaining" }
-    ],
-    "Chapter 4: Project Cost Management": [
-        { name: "Cost Management Plan", status: "Remaining" },
-        { name: "Budget Estimates", status: "Remaining" },
-        { name: "Cost Baseline", status: "Remaining" },
-        { name: "Expense Tracking Reports", status: "Remaining" }
-    ],
-    "Chapter 5: Project Quality Management": [
-        { name: "Quality Management Plan", status: "Remaining" },
-        { name: "Quality Metrics", status: "Remaining" },
-        { name: "Quality Assurance Reports", status: "Remaining" },
-        { name: "Quality Control Checklists", status: "Remaining" }
-    ],
-    "Chapter 6: Project Resource Management": [
-        { name: "Resource Management Plan", status: "Remaining" },
-        { name: "Resource Breakdown Structure (RBS)", status: "Remaining" },
-        { name: "Team Assignments", status: "Remaining" },
-        { name: "Responsibility Assignment Matrix (RAM)", status: "Remaining" },
-        { name: "Resource Utilization Reports", status: "Remaining" }
-    ],
-    "Chapter 12: Project Closure": [
-        { name: "Final Project Report", status: "Remaining" },
-        { name: "Handover Document", status: "Remaining" },
-        { name: "Client Acceptance Form", status: "Remaining" },
-        { name: "Project Closure Checklist", status: "Remaining" },
-        { name: "Archived Project Records", status: "Remaining" }
+        { name: "Activity List and Attributes", status: "In Progress" },
+        { name: "Milestone List", status: "Completed" }
     ]
 };
-
-function updateTaskCounts() {
-    let completedCount = 0, inProgressCount = 0, remainingCount = 0;
-
-    for (const chapter in chapters) {
-        chapters[chapter].forEach(task => {
-            if (task.status === "Completed") completedCount++;
-            else if (task.status === "In Progress") inProgressCount++;
-            else remainingCount++;
-        });
-    }
-
-    document.getElementById("completed-count").innerText = completedCount;
-    document.getElementById("in-progress-count").innerText = inProgressCount;
-    document.getElementById("remaining-count").innerText = remainingCount;
-}
 
 function renderTasks() {
     const taskList = document.getElementById("task-list");
@@ -68,44 +26,18 @@ function renderTasks() {
 
     for (const chapter in chapters) {
         const chapterRow = document.createElement("tr");
-        chapterRow.innerHTML = `<td colspan="3" class="chapter-header"><strong>${chapter}</strong></td>`;
+        chapterRow.innerHTML = `<td colspan="2" class="chapter-header"><strong>${chapter}</strong></td>`;
         taskList.appendChild(chapterRow);
 
-        chapters[chapter].forEach((task, index) => {
+        chapters[chapter].forEach(task => {
             const row = document.createElement("tr");
-
             row.innerHTML = `
                 <td>${task.name}</td>
                 <td class="status ${task.status.toLowerCase().replace(" ", "-")}">${task.status}</td>
-                <td>
-                    <button class="complete-btn" onclick="updateStatus('${chapter}', ${index}, 'Completed')">Complete</button>
-                    <button class="progress-btn" onclick="updateStatus('${chapter}', ${index}, 'In Progress')">In Progress</button>
-                    <button class="reset-btn" onclick="updateStatus('${chapter}', ${index}, 'Remaining')">Reset</button>
-                </td>
             `;
-
             taskList.appendChild(row);
         });
     }
-
-    updateTaskCounts();
-}
-
-// Save tasks to localStorage
-function saveTasks() {
-    localStorage.setItem("projectTasks", JSON.stringify(chapters));
-}
-
-function updateStatus(chapter, index, newStatus) {
-    chapters[chapter][index].status = newStatus;
-    saveTasks(); // Save changes
-    renderTasks();
-}
-
-// Clear localStorage and reset progress
-function resetProgress() {
-    localStorage.removeItem("projectTasks");
-    location.reload(); // Reload page to reset all data
 }
 
 document.addEventListener("DOMContentLoaded", renderTasks);
