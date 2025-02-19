@@ -62,3 +62,10 @@ th {
     text-align: left;
     padding: 10px;
 }
+.logo {
+    width: 50px;  /* Set a small icon size */
+    height: auto;  /* Maintain aspect ratio */
+    display: block;
+    margin: 10px auto; /* Center the icon */
+}
+
